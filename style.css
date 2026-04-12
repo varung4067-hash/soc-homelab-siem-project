@@ -1,0 +1,309 @@
+/* =========================
+   GLOBAL
+========================= */
+body {
+    background: radial-gradient(ellipse at top, #0b1225 0%, #020617 60%);
+    color: #e5e7eb;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    padding: 24px;
+}
+
+h1, h2 {
+    margin: 0;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 16px;
+    color: #e5e7eb;
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.header h1 {
+    font-size: 22px;
+}
+
+.auto-refresh {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.auto-refresh .on {
+    color: #22c55e;
+    font-weight: 600;
+}
+
+/* =========================
+   SUMMARY CARDS
+========================= */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin-bottom: 32px;
+}
+
+.card {
+    background: linear-gradient(180deg, #0f172a, #020617);
+    border-radius: 16px;
+    padding: 22px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+.card h2 {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.card.critical {
+    border: 1px solid rgba(239,68,68,0.5);
+    box-shadow: 0 0 35px rgba(239,68,68,0.25);
+}
+
+.card.high {
+    border: 1px solid rgba(249,115,22,0.5);
+    box-shadow: 0 0 35px rgba(249,115,22,0.25);
+}
+
+/* =========================
+   CHARTS
+========================= */
+.charts-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 28px;
+    margin-bottom: 36px;
+}
+
+.chart-box {
+    background: linear-gradient(180deg, #0b1225, #020617);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.chart-box h2 {
+    margin-bottom: 14px;
+}
+
+.chart-box canvas {
+    width: 100% !important;
+    height: 260px !important;
+}
+
+/* =========================
+   ATTACK CHAIN SECTION
+========================= */
+.attack-section {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 28px;
+    margin-bottom: 40px;
+}
+
+.attack-chain {
+    background: linear-gradient(180deg, #0b1225, #020617);
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,193,7,0.25);
+}
+
+.attack-chain h2 {
+    margin-bottom: 16px;
+}
+
+.attack-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.attack-steps li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 14px;
+}
+
+.step-dot {
+    width: 8px;
+    height: 8px;
+    background: #facc15;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #facc15;
+}
+
+.risk-score {
+    margin-top: 18px;
+    width: fit-content;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(239,68,68,0.15);
+    color: #ef4444;
+    font-weight: 700;
+}
+
+/* =========================
+   RESPONSE BOX
+========================= */
+.response-box {
+    background: linear-gradient(180deg, #0b1225, #020617);
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    border: 1px solid rgba(34,197,94,0.25);
+}
+
+.response-box ol {
+    padding-left: 18px;
+    margin-top: 12px;
+}
+
+.response-box li {
+    padding: 6px 0;
+    font-size: 14px;
+}
+
+/* =========================
+   ALERT TABLE
+========================= */
+.table-container {
+    background: linear-gradient(180deg, #0b1225, #020617);
+    border-radius: 18px;
+    padding: 16px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #94a3b8;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+td {
+    padding: 12px;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+tr:hover {
+    background: rgba(255,255,255,0.03);
+}
+
+.latest-alert {
+    border-left: 4px solid #facc15;
+    background: rgba(250,204,21,0.08);
+}
+
+/* =========================
+   BADGES & TAGS
+========================= */
+.badge {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.severity-critical {
+    background: rgba(239,68,68,0.2);
+    color: #ef4444;
+}
+
+.severity-high {
+    background: rgba(249,115,22,0.2);
+    color: #f97316;
+}
+
+.severity-medium {
+    background: rgba(250,204,21,0.2);
+    color: #facc15;
+}
+
+.severity-low {
+    background: rgba(56,189,248,0.2);
+    color: #38bdf8;
+}
+
+.mitre {
+    background: rgba(59,130,246,0.2);
+    color: #60a5fa;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.timestamp {
+    font-family: monospace;
+    color: #93c5fd;
+}
+
+/* =========================
+   ATTACK CHAIN SIZE FIX (SAFE OVERRIDE)
+   DO NOT REMOVE EXISTING STYLES
+========================= */
+
+/* Limit attack chain height */
+.attack-chain {
+    max-height: 200px;          /* matches reference design */
+    overflow-y: auto;           /* enable internal scroll */
+}
+
+/* Reduce vertical spacing between steps */
+.attack-steps li {
+    padding: 5px 0;
+    font-size: 12.5px;
+}
+
+/* Make scrollbar subtle (modern SOC look) */
+.attack-chain::-webkit-scrollbar {
+    width: 6px;
+}
+
+.attack-chain::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.attack-chain::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.3);
+    border-radius: 6px;
+}
+
+.attack-chain::-webkit-scrollbar-thumb:hover {
+    background: rgba(148, 163, 184, 0.5);
+}
+
+/* Keep risk score compact */
+.risk-score {
+    margin-top: 10px;
+    font-size: 13px;
+}
+

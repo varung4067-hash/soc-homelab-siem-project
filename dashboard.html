@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SIEM Security Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<!-- Auto Refresh -->
+<script>
+setTimeout(() => {
+    window.location.reload();
+}, 10000);
+</script>
+
+<!-- ===================== -->
+<!-- HEADER -->
+<!-- ===================== -->
+<div class="header">
+    <h1>🛡️ SIEM Security Dashboard</h1>
+    <div class="auto-refresh">
+        Auto Refresh: <span class="on">ON</span>
+    </div>
+</div>
+
+<!-- ===================== -->
+<!-- SUMMARY CARDS -->
+<!-- ===================== -->
+<div class="cards">
+    <div class="card">
+        <h2>Total Alerts</h2>
+        <p>{{ total_alerts }}</p>
+    </div>
+
+    <div class="card critical">
+        <h2>Critical</h2>
+        <p>{{ critical_alerts }}</p>
+    </div>
+
+    <div class="card high">
+        <h2>High</h2>
+        <p>{{ total_alerts - critical_alerts }}</p>
+    </div>
+
+    <div class="card">
+        <h2>MITRE Coverage</h2>
+        <p>{{ mitre_labels | length }} TTPs</p>
+    </div>
+</div>
+
+<!-- ===================== -->
+<!-- CHART ROW -->
+<!-- ===================== -->
+<div class="charts-row">
+
+    <!-- Alerts Over Time -->
+    <div class="chart-box large">
+        <h2>📈 Alerts Over Time</h2>
+        <canvas id="alertsTimeline"></canvas>
+    </div>
+
+    <!-- MITRE ATT&CK Coverage -->
+    <div class="chart-box small">
+        <h2>🧠 MITRE ATT&CK Coverage</h2>
+        <canvas id="mitreChart"></canvas>
+    </div>
+
+</div>
+
+<!-- ===================== -->
+<!-- ATTACK CHAIN + RESPONSE -->
+<!-- ===================== -->
+{% if attack_chains %}
+<div class="attack-section">
+
+    <!-- Attack Chain -->
+    <div class="attack-chain">
+        <h2>⚠️ Attack Chain Detected</h2>
+
+        {% for chain in attack_chains %}
+        <ul class="attack-steps">
+            {% for step in chain.steps %}
+            <li>
+                <span class="step-dot"></span>
+                {{ step.alert_name }}
+                <span class="mitre">{{ step.mitre_technique }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <div class="risk-score">
+            {{ chain.attack_summary.probability }}/100
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Recommended Response -->
+    <div class="response-box">
+        <h2>🛠️ Recommended Response</h2>
+        <ol>
+            <li>Investigate endpoint activity</li>
+            <li>Review PowerShell execution logs</li>
+            <li>Isolate endpoint if behavior persists</li>
+            <li>Reset potentially compromised credentials</li>
+        </ol>
+    </div>
+
+</div>
+{% endif %}
+
+<!-- ===================== -->
+<!-- ALERT TABLE -->
+<!-- ===================== -->
+<div class="table-container">
+<table>
+    <thead>
+        <tr>
+            <th>Alert Name</th>
+            <th>Severity</th>
+            <th>MITRE</th>
+            <th>Process</th>
+            <th>User</th>
+            <th>Confidence</th>
+            <th>Reason</th>
+            <th>Timestamp</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% if alerts %}
+        {% for alert in alerts %}
+        <tr class="{% if loop.first %}latest-alert{% endif %}">
+            <td>{{ alert.alert_name }}</td>
+
+            <td>
+                <span class="badge severity-{{ alert.severity|lower }}">
+                    {{ alert.severity }}
+                </span>
+            </td>
+
+            <td><span class="mitre">{{ alert.mitre_technique }}</span></td>
+            <td class="process">{{ alert.process }}</td>
+            <td>{{ alert.user }}</td>
+
+            <td>
+                <div class="confidence-bar">
+                    {{ ((alert.confidence | float) * 100) | round(0) }}%
+                </div>
+            </td>
+
+            <td>{{ alert.reason }}</td>
+            <td class="timestamp">{{ alert.timestamp }}</td>
+        </tr>
+        {% endfor %}
+    {% else %}
+        <tr class="no-alerts">
+            <td colspan="8">No alerts detected yet</td>
+        </tr>
+    {% endif %}
+    </tbody>
+</table>
+</div>
+
+<!-- ===================== -->
+<!-- CHART SCRIPTS -->
+<!-- ===================== -->
+<script>
+new Chart(document.getElementById('alertsTimeline'), {
+    type: 'line',
+    data: {
+        labels: {{ chart_labels | tojson }},
+        datasets: [
+            { label: "Critical", data: {{ critical_values | tojson }}, borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.2)', fill: true, tension: 0.4 },
+            { label: "High", data: {{ high_values | tojson }}, borderColor: '#f97316', backgroundColor: 'rgba(249,115,22,0.15)', fill: true, tension: 0.4 },
+            { label: "Medium", data: {{ medium_values | tojson }}, borderColor: '#facc15', backgroundColor: 'rgba(250,204,21,0.12)', fill: true, tension: 0.4 },
+            { label: "Low", data: {{ low_values | tojson }}, borderColor: '#38bdf8', backgroundColor: 'rgba(56,189,248,0.12)', fill: true, tension: 0.4 }
+        ]
+    },
+    options: {
+        plugins: { legend: { labels: { color: '#ccc' } } },
+        scales: {
+            x: { ticks: { color: '#aaa' }, grid: { display: false } },
+            y: { beginAtZero: true, ticks: { color: '#aaa' } }
+        }
+    }
+});
+</script>
+
+<script>
+new Chart(document.getElementById('mitreChart'), {
+    type: 'bar',
+    data: {
+        labels: {{ mitre_labels | tojson }},
+        datasets: [{
+            data: {{ mitre_values | tojson }},
+            backgroundColor: ['#ef4444','#f97316','#facc15','#22c55e','#38bdf8'],
+            borderRadius: 6
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        plugins: { legend: { display: false } },
+        scales: {
+            x: { ticks: { color: '#aaa' } },
+            y: { ticks: { color: '#ccc' } }
+        }
+    }
+});
+</script>
+
+</body>
+</html>

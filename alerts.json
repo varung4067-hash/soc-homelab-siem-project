@@ -1,0 +1,42 @@
+[
+    {
+        "alert_name": "Suspicious PowerShell Execution",
+        "severity": "CRITICAL",
+        "confidence": "0.90",
+        "reason": "Encoded PowerShell command",
+        "mitre_technique": "T1059.001",
+        "process": "c:\\windows\\system32\\windowspowershell\\v1.0\\powershell.exe",
+        "user": "DESKTOP-OLSIBJ2\\Acer",
+        "timestamp": "2026-01-12 12:51:18.417"
+    },
+    {
+        "alert_name": "Suspicious PowerShell Execution",
+        "severity": "HIGH",
+        "confidence": "0.75",
+        "reason": "PowerShell IEX execution",
+        "mitre_technique": "T1059.001",
+        "process": "c:\\windows\\system32\\windowspowershell\\v1.0\\powershell.exe",
+        "user": "DESKTOP-OLSIBJ2\\Acer",
+        "timestamp": "2026-01-12 12:51:03.946"
+    },
+    {
+        "alert_name": "Suspicious PowerShell Execution",
+        "severity": "CRITICAL",
+        "confidence": "0.90",
+        "reason": "Encoded PowerShell command",
+        "mitre_technique": "T1059.001",
+        "process": "c:\\windows\\system32\\windowspowershell\\v1.0\\powershell.exe",
+        "user": "DESKTOP-OLSIBJ2\\Acer",
+        "timestamp": "2026-01-12 12:48:34.711"
+    },
+    {
+        "alert_name": "Suspicious PowerShell Execution",
+        "severity": "HIGH",
+        "confidence": "0.75",
+        "reason": "PowerShell IEX execution",
+        "mitre_technique": "T1059.001",
+        "process": "c:\\windows\\system32\\windowspowershell\\v1.0\\powershell.exe",
+        "user": "DESKTOP-OLSIBJ2\\Acer",
+        "timestamp": "2026-01-12 12:48:26.476"
+    }
+]
