@@ -1,4 +1,5 @@
-# SIEM Security Dashboard (SOC Home Lab)
+## 👨‍💻 Author- Varun Gupta  
+Aspiring SOC Analyst | SIEM | Threat Detection  # SIEM Security Dashboard (SOC Home Lab)
 
 ## 📌 Overview
 Built a hands-on SOC home lab that simulates real-world security monitoring, threat detection, and incident response using Sysmon and Windows Event Logs. The project focuses on detecting suspicious activities, generating alerts, and visualizing security insights through a custom SIEM dashboard.
@@ -28,4 +29,13 @@ Python, Sysmon, Windows Event Logs, Flask, JSON, Chart.js
 
 ## 🧠 Skills Demonstrated
 SIEM Monitoring, Log Analysis, Threat Detection, Incident Response, MITRE ATT&CK Mapping
+
+## ⚙️ How It Works
+
+1. Sysmon collects endpoint logs  
+2. Python detection engine parses logs  
+3. Detection rules identify suspicious behavior  
+4. Alerts generated in JSON format  
+5. Flask dashboard visualizes alerts  
+6. Attack chains built from correlated events  
 
