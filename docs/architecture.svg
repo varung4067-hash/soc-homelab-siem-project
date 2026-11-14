@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="560" viewBox="0 0 1440 560" role="img" aria-labelledby="title desc">
+  <title id="title">Sysmon SIEM homelab detection flow</title>
+  <desc id="desc">Detection pipeline from Windows Sysmon Event ID 1 through a Python reader, PowerShell keyword rules, MITRE ATT&CK alert enrichment, host and user correlation, and a Flask investigation dashboard.</desc>
+  <defs>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="#9bb2cc" stroke-opacity=".07"/></pattern>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1421"/><stop offset="1" stop-color="#121d2e"/></linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#44c8ec"/><stop offset="1" stop-color="#6f8bff"/></linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64bce6"/></marker>
+    <style>
+      .eyebrow{font:700 13px Arial,sans-serif;letter-spacing:3px;fill:#8ca8c7}
+      .heading{font:700 30px Arial,sans-serif;fill:#f2f7ff}
+      .sub{font:14px Arial,sans-serif;fill:#a9bdd4}
+      .num{font:700 12px Arial,sans-serif;fill:#78c8ef;letter-spacing:2px}
+      .title{font:700 18px Arial,sans-serif;fill:#f0f6ff}
+      .body{font:13px Arial,sans-serif;fill:#b6c7dc}
+      .tiny{font:11px Arial,sans-serif;fill:#8fa8c2}
+    </style>
+  </defs>
+  <rect width="1440" height="560" rx="26" fill="url(#bg)"/>
+  <rect width="1440" height="560" rx="26" fill="url(#grid)"/>
+  <rect x="48" y="44" width="5" height="80" rx="2.5" fill="url(#cyan)"/>
+  <text x="76" y="64" class="eyebrow">SYSMon SIEM HOMELAB / DETECTION PIPELINE</text>
+  <text x="76" y="106" class="heading">From endpoint telemetry to an analyst-ready alert.</text>
+  <text x="76" y="134" class="sub">A learning lab that turns process-creation events into contextual signals for investigation.</text>
+
+  <g stroke="#64bce6" stroke-width="2.4" fill="none" marker-end="url(#arrow)">
+    <path d="M278 305H310"/><path d="M540 305H572"/><path d="M802 305H834"/><path d="M1064 305H1096"/>
+  </g>
+
+  <g>
+    <rect x="64" y="205" width="214" height="200" rx="16" fill="#17283d" stroke="#36516c"/>
+    <circle cx="92" cy="235" r="15" fill="#1f4662"/><text x="92" y="239" text-anchor="middle" class="num">01</text>
+    <text x="88" y="285" class="title">Windows endpoint</text>
+    <text x="88" y="315" class="body">Sysmon Event ID 1</text>
+    <text x="88" y="340" class="body">Process creation</text>
+    <text x="88" y="375" class="tiny">Operational event channel</text>
+  </g>
+  <g>
+    <rect x="310" y="205" width="230" height="200" rx="16" fill="#17283d" stroke="#36516c"/>
+    <circle cx="338" cy="235" r="15" fill="#1f4662"/><text x="338" y="239" text-anchor="middle" class="num">02</text>
+    <text x="334" y="285" class="title">Python event reader</text>
+    <text x="334" y="315" class="body">Read + parse event XML</text>
+    <text x="334" y="340" class="body">Extract process context</text>
+    <text x="334" y="375" class="tiny">pywin32 · XML parsing</text>
+  </g>
+  <g>
+    <rect x="572" y="205" width="230" height="200" rx="16" fill="#17283d" stroke="#4e5681"/>
+    <circle cx="600" cy="235" r="15" fill="#3d3d72"/><text x="600" y="239" text-anchor="middle" class="num">03</text>
+    <text x="596" y="285" class="title">Detection rules</text>
+    <text x="596" y="315" class="body">Encoded PowerShell</text>
+    <text x="596" y="340" class="body">IEX · Base64 · DownloadString</text>
+    <text x="596" y="375" class="tiny">Keyword-based triage signals</text>
+  </g>
+  <g>
+    <rect x="834" y="205" width="230" height="200" rx="16" fill="#17283d" stroke="#4e5681"/>
+    <circle cx="862" cy="235" r="15" fill="#3d3d72"/><text x="862" y="239" text-anchor="middle" class="num">04</text>
+    <text x="858" y="285" class="title">Alert enrichment</text>
+    <text x="858" y="315" class="body">Severity + confidence</text>
+    <text x="858" y="340" class="body">MITRE ATT&amp;CK T1059.001</text>
+    <text x="858" y="375" class="tiny">Rationale and technique context</text>
+  </g>
+  <g>
+    <rect x="1096" y="205" width="280" height="200" rx="16" fill="#17283d" stroke="#3d756e"/>
+    <circle cx="1124" cy="235" r="15" fill="#235c56"/><text x="1124" y="239" text-anchor="middle" class="num">05</text>
+    <text x="1120" y="285" class="title">Investigate in Flask</text>
+    <text x="1120" y="315" class="body">Host + user correlation</text>
+    <text x="1120" y="340" class="body">10-minute grouping window</text>
+    <text x="1120" y="375" class="tiny">Alert dashboard · visual summaries</text>
+  </g>
+
+  <rect x="64" y="448" width="1312" height="66" rx="13" fill="#142338" stroke="#2f4964"/>
+  <text x="90" y="475" class="num">INVESTIGATION PRINCIPLE</text>
+  <text x="90" y="498" class="body">A rule match is a signal to investigate—not proof of compromise. Context, tuning and validation still matter.</text>
+</svg>

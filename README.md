@@ -38,26 +38,11 @@ These are useful starting points for a lab, not definitive indicators of comprom
 
 ## How the pieces fit together
 
-```text
-Windows endpoint
-      |
-      v
-Sysmon Event ID 1
-      |
-      v
-Python event reader
-      |
-      v
-PowerShell indicator rules
-      |
-      v
-Structured JSON alerts
-      |
-      +----> Alert correlation
-      |
-      v
-Flask investigation dashboard
-```
+<p align="center">
+  <img src="docs/architecture.svg" alt="Sysmon SIEM detection pipeline from Windows endpoint telemetry through Python rules and alert enrichment to the Flask dashboard" width="100%" />
+</p>
+
+The diagram shows the current learning-lab flow. Keyword matches provide triage context; an analyst still needs to validate the event and surrounding activity.
 
 ## Technology
 
